@@ -79,7 +79,7 @@ http://localhost:5173
 
 ---
 
-Author
+ **Author**
 
-Farhan
-B.Tech CSE Student
+
+**Farhan Nur** 
