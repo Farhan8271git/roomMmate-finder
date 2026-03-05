@@ -1,16 +1,85 @@
-# React + Vite
+# RoomMate Finder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## RoomMate Finder is a full-stack web application that helps people find compatible roommates.
+Users can either post their requirement for a roommate or browse listings from others who are looking to share accommodation.
 
-Currently, two official plugins are available:
+The goal of this project is to make the roommate search process simple and convenient through a clean and responsive interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Post a requirement for a roommate
+- Browse available roommate listings
+- View details of people looking for accommodation
+- Simple and responsive user interface
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Tech Stack
+
+Frontend
+
+- React
+- Vite
+- JavaScript
+- CSS
+
+Backend
+
+- Node.js
+- Express.js
+
+Database
+
+- MongoDB
+
+---
+
+Project Structure
+
+roommate-finder
+│
+├── config
+├── controllers
+├── middleware
+├── models
+├── routes
+├── public
+├── src
+│
+├── server.js
+├── package.json
+├── vite.config.js
+└── index.html
+
+---
+
+Installation
+
+Clone the repository
+
+git clone https://github.com/Farhan8271git/roomMmate-finder.git
+
+Navigate to the project folder
+
+cd roomMmate-finder
+
+Install dependencies
+
+npm install
+
+Run the development server
+
+npm run dev
+
+Open in browser
+
+http://localhost:5173
+
+---
+
+Author
+
+Farhan
+B.Tech CSE Student
