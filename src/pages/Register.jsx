@@ -12,8 +12,10 @@ function Register() {
     password: '',
     phone: '',
     age: '',
-    gender: 'Male'
+    gender: ''
   });
+
+  const [ageError, setAgeError] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,12 +30,84 @@ function Register() {
     };
   }, [isAuthenticated, navigate, dispatch]);
 
+  // Calculate age from date and validate >= 18
+  const calculateAge = (birthDate) => {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    
+    return age;
+  };
+
+  // Get max date for 18 years old (today - 18 years)
+  const getMaxDate = () => {
+    const today = new Date();
+    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    return maxDate.toISOString().split('T')[0];
+  };
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    
+    if (name === 'age') {
+      const age = calculateAge(value);
+      if (age < 18) {
+        setAgeError('You must be at least 18 years old');
+        setFormData({ ...formData, [name]: '' });
+      } else {
+        setAgeError('');
+        setFormData({ ...formData, [name]: value });
+      }
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validate all required fields
+    if (!formData.name.trim()) {
+      alert('Please enter your name');
+      return;
+    }
+    
+    if (!formData.email.trim()) {
+      alert('Please enter your email');
+      return;
+    }
+    
+    if (!formData.password || formData.password.length < 6) {
+      alert('Please enter a password with at least 6 characters');
+      return;
+    }
+    
+    if (!formData.phone || formData.phone.length !== 10) {
+      alert('Please enter a valid 10-digit phone number');
+      return;
+    }
+    
+    if (!formData.age) {
+      alert('Please select your date of birth');
+      return;
+    }
+    
+    if (ageError) {
+      alert('You must be at least 18 years old to register');
+      return;
+    }
+    
+    if (!formData.gender || formData.gender === '') {
+      alert('Please select your gender');
+      return;
+    }
+    
+    console.log('Submitting form data:', formData);
     dispatch(register(formData));
   };
 
@@ -98,17 +172,17 @@ function Register() {
             </div>
 
             <div className="form-group">
-              <label>Age</label>
+              <label>Date of Birth</label>
               <input
-                type="number"
+                type="date"
                 name="age"
                 value={formData.age}
                 onChange={handleChange}
-                placeholder="Your age"
+                max={getMaxDate()}
                 required
-                min="18"
-                max="100"
+                className="date-input"
               />
+              {ageError && <span className="input-error">{ageError}</span>}
             </div>
           </div>
 
@@ -120,6 +194,7 @@ function Register() {
               onChange={handleChange}
               required
             >
+              <option value="">Select your gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other</option>
@@ -129,7 +204,7 @@ function Register() {
           <button 
             type="submit" 
             className="auth-btn"
-            disabled={loading}
+            disabled={loading || ageError}
           >
             {loading ? 'Creating Account...' : 'Sign Up'}
           </button>

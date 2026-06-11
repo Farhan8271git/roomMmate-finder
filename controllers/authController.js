@@ -1,10 +1,36 @@
 // backend/controllers/authController.js
 const User = require('../models/User');
 
+// Calculate age from date of birth
+const calculateAge = (birthDate) => {
+  const today = new Date();
+  const birth = new Date(birthDate);
+  let age = today.getFullYear() - birth.getFullYear();
+  const monthDiff = today.getMonth() - birth.getMonth();
+  
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+    age--;
+  }
+  
+  return age;
+};
+
 // Register a new user
 exports.registerUser = async (req, res) => {
   try {
     const { name, email, password, phone, age, gender } = req.body;
+
+    // Validate age (should be >= 18)
+    let userAge = age;
+    if (typeof age === 'string') {
+      userAge = calculateAge(age);
+      if (userAge < 18) {
+        return res.status(400).json({
+          success: false,
+          message: 'You must be at least 18 years old to register'
+        });
+      }
+    }
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -21,7 +47,7 @@ exports.registerUser = async (req, res) => {
       email,
       password,
       phone,
-      age,
+      age: userAge,
       gender
     });
 

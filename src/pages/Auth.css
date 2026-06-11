@@ -5,59 +5,85 @@
   align-items: center;
   min-height: calc(100vh - 70px);
   padding: 40px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .auth-card {
   background: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 50px 45px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 450px;
+  max-width: 480px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
 }
 
 .auth-card h2 {
-  font-size: 28px;
-  color: #1f2937;
-  margin-bottom: 8px;
+  font-size: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
 .auth-subtitle {
-  color: #6b7280;
-  margin-bottom: 24px;
+  color: #64748b;
+  margin-bottom: 32px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .form-group label {
   font-weight: 600;
-  color: #374151;
+  color: #334155;
   font-size: 14px;
+  letter-spacing: 0.3px;
 }
 
 .form-group input,
 .form-group select {
-  padding: 12px 16px;
-  border: 2px solid #e5e7eb;
-  border-radius: 8px;
+  padding: 13px 18px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 15px;
-  transition: border-color 0.3s;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  font-family: inherit;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  border-color: #cbd5e1;
+  background-color: #fff;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #4f46e5;
+  border-color: #667eea;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .form-row {
@@ -67,42 +93,107 @@
 }
 
 .auth-btn {
-  background: #4f46e5;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 14px;
-  border-radius: 8px;
-  font-weight: 600;
+  padding: 16px 28px;
+  border-radius: 12px;
+  font-weight: 700;
   font-size: 16px;
-  margin-top: 8px;
-  transition: background 0.3s;
+  margin-top: 12px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
 }
 
 .auth-btn:hover:not(:disabled) {
-  background: #4338ca;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.auth-btn:active:not(:disabled) {
+  transform: translateY(-1px);
 }
 
 .auth-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
 }
 
 .auth-footer {
   text-align: center;
-  margin-top: 20px;
-  color: #6b7280;
+  margin-top: 28px;
+  color: #64748b;
+  font-size: 14px;
 }
 
 .auth-footer a {
-  color: #4f46e5;
-  font-weight: 600;
+  color: #667eea;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 .auth-footer a:hover {
+  color: #764ba2;
   text-decoration: underline;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #991b1b;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border-left: 4px solid #dc2626;
+  font-weight: 500;
+}
+
+.input-error {
+  color: #dc2626;
+  font-size: 13px;
+  margin-top: 4px;
+  display: block;
+  font-weight: 500;
+}
+
+.date-input {
+  cursor: pointer !important;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 6px;
+  opacity: 0.7;
+  filter: invert(0.5) sepia(0.8) saturate(0.8) hue-rotate(200deg);
+  transition: all 0.3s ease;
+}
+
+.date-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.date-input:focus::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  filter: invert(0.3) sepia(1) saturate(1) hue-rotate(220deg);
 }
 
 @media (max-width: 576px) {
   .form-row {
     grid-template-columns: 1fr;
+  }
+
+  .auth-card {
+    padding: 35px 25px;
+    max-width: 95%;
+  }
+
+  .auth-card h2 {
+    font-size: 26px;
   }
 }

@@ -24,7 +24,14 @@ export const register = createAsyncThunk(
       localStorage.setItem('user', JSON.stringify(data.user));
       return data;
     } catch (error) {
-      return rejectWithValue(error.response.data.message);
+      // Handle different error scenarios
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data.message || 'Registration failed');
+      } else if (error.message) {
+        return rejectWithValue(error.message);
+      } else {
+        return rejectWithValue('An error occurred during registration');
+      }
     }
   }
 );
