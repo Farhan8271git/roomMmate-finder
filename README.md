@@ -13,6 +13,7 @@ Features
 - Browse available roommate listings
 - View details of people looking for accommodation
 - Simple and responsive user interface
+  -updated the UI
 
 ---
 
